@@ -1,10 +1,9 @@
 package com.member.main;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.member.controller.ManageMemberControl;
 import com.member.domain.Member;
 
 public class MemberApplication {
@@ -16,6 +15,7 @@ public class MemberApplication {
 		Scanner s = new Scanner(System.in);
 		
 		ArrayList<Member> members = new ArrayList<>(); // 회원 리스트 생성
+		ManageMemberControl controlMember = new ManageMemberControl();
 		
 		createAdmin(members, 0); // 회원 리스트 0번에 관리자 생성
 		
@@ -82,20 +82,14 @@ public class MemberApplication {
 				String inputAddr = s.nextLine();
 				System.out.print("등록하실 회원의 비밀번호를 입력하세요: ");
 				String inputPassword = s.nextLine();
-				members.add(new Member(num, inputName, inputPhone, inputAddr, inputPassword));
-				num++; // 등록 후 회원 번호 1 증가
-				System.out.println("등록 완료되었습니다.");
+				num = controlMember.createMember(num, inputName, inputPhone, inputAddr, inputPassword, members);
 				break;
 			case 2:
 				System.out.print("조회할 회원 이름을 입력해주세요 ");
 				String searchName = s.nextLine();
 				for (int i = 1; i < members.size(); i++) {
 					if (searchName.equals(members.get(i).getName())) {
-						System.out.printf("%s 고객 정보 : \n", searchName);
-						System.out.printf("회원번호: %02d \n", members.get(i).getNum());
-						System.out.printf("이름: %s \n", members.get(i).getName());
-						System.out.printf("연락처: %s \n", members.get(i).getPhone());
-						System.out.printf("주소: %s \n", members.get(i).getAddr());
+						controlMember.readMember(i, members);
 						break Menu;
 					}
 				}
@@ -133,10 +127,7 @@ public class MemberApplication {
 				System.out.printf("%s 회원의 비밀번호를 입력하세요", editedName);
 				String editPassword = s.nextLine();
 				if (editPassword.equals(members.get(editedNum).getPassword())) {
-					members.get(editedNum).setName(editName);
-					members.get(editedNum).setPhone(editPhone);
-					members.get(editedNum).setAddr(editAddr);
-					System.out.println("수정 완료되었습니다.");
+					controlMember.updateMember(editedNum, editName, editPhone, editAddr, members);
 					break Menu;
 				} else {
 					System.out.println("비밀번호가 일치하지 않습니다.");
@@ -150,8 +141,7 @@ public class MemberApplication {
 						System.out.print("비밀번호를 입력하세요: ");
 						String deletePassword = s.nextLine();
 						if (deletePassword.equals(members.get(i).getPassword())) {
-							members.remove(members.get(i));
-							System.out.println("삭제되었습니다.");
+							controlMember.deleteMember(i, members);
 							break Menu;
 						} else {
 							System.out.println("비밀번호가 일치하지 않습니다.");
@@ -165,34 +155,17 @@ public class MemberApplication {
 				}
 				break;
 			case 5:
-				for (int i = 1; i < members.size(); i++) {
-					System.out.printf("회원번호 %d  이름 %s  연락처 %s \n", i, members.get(i).getName(), members.get(i).getPhone());
-				}
+				controlMember.listMember(members);
 				break;
-			case 6:
-				try {
-					File memberList = new File("memberList.txt");
-					if (!memberList.exists()) {
-						memberList.createNewFile();
-					}
-					FileWriter memberWriter = new FileWriter(memberList);
-					
-					for (int i = 1; i < members.size(); i++) {
-						System.out.println(String.format("회원번호 : %d  이름 : %s  연락처 : %s  주소 : %s \n", i, members.get(i).getName(), members.get(i).getPhone(), members.get(i).getAddr()));
-						memberWriter.write(String.format("회원번호 : %d  이름 : %s  연락처 : %s  주소 : %s \n", i, members.get(i).getName(), members.get(i).getPhone(), members.get(i).getAddr()));
-					}
-					memberWriter.close();
-					System.out.println("파일출력 완료");
-				} catch (Exception e) {
-					e.getMessage();
-				}
+			case 6: 
+				controlMember.fileMember(members);
 				break;
 			case 7:
 				quit = true;
 				System.out.println("회원 관리 프로그램을 종료합니다.");
 				break;
 			default:
-				throw new IllegalArgumentException("Unexpected value: " + inputNum);
+				System.out.println("올바른 숫자를 입력해주세요.");
 			}
 		}
 		
