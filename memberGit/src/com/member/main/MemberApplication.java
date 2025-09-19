@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.member.controller.ManageMemberControl;
 import com.member.domain.Member;
+import com.member.exception.*;
 
 public class MemberApplication {
 	public static void createAdmin(ArrayList<Member> members, int num) { // 관리자 생성 메서드 static 으로 선언
@@ -76,6 +77,13 @@ public class MemberApplication {
 			case 1:
 				System.out.print("등록하실 회원의 이름을 입력하세요: ");
 				String inputName = s.nextLine();
+				
+				for (int i = 1; i < members.size(); i++ ) {
+					if (inputName.equals(members.get(i).getName())) {
+						throw new DuplicateMemberException("이미 존재하는 이름입니다.");
+					}
+				}
+				
 				System.out.print("등록하실 회원의 연락처를 입력하세요: ");
 				String inputPhone = s.nextLine();
 				System.out.print("등록하실 회원의 주소를 입력하세요: ");
@@ -93,21 +101,22 @@ public class MemberApplication {
 						break Menu;
 					}
 				}
-				System.out.println("일치하는 회원이 없습니다.");
-				break;
+				throw new MemberNotFoundException("일치하는 회원이 없습니다.");
 			case 3:
 				System.out.print("수정할 회원 이름을 입력해주세요");
 				String editedName = s.nextLine();
 				int editedNum = -1;
-				for (int i = 0; i < members.size(); i++) {
+				boolean isExist = false;
+				for (int i = 1; i < members.size(); i++) {
 					if (editedName.equals(members.get(i).getName())) {
 						editedNum = i;
+						isExist = true;
 						break;
 					}
-					if (i == members.size() - 1) {
-						System.out.println("일치하는 회원이 없습니다.");
-						break Menu;						
-					}
+				}
+				if (!isExist) {
+					throw new MemberNotFoundException("일치하는 회원이 없습니다.");
+//						break Menu;						
 				}
 				System.out.printf("%s 회원의 이름을 수정하세요", editedName);
 				String editName = s.nextLine();
@@ -149,8 +158,8 @@ public class MemberApplication {
 						}
 					}
 					if (i == members.size() - 1) {
-						System.out.println("일치하는 회원이 없습니다.");
-						break Menu;
+						throw new MemberNotFoundException("일치하는 회원이 없습니다.");
+//						break Menu;
 					}
 				}
 				break;
