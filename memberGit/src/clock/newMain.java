@@ -5,7 +5,7 @@ public class newMain {
 
 		MergeClass c = new MergeClass();
 		
-		c.count(20);
+		c.count(10);
 		
 	}
 
