@@ -4,10 +4,11 @@ public class MergeClass {
 	private TTL7490 ttl7490;
 	private TTL7446 ttl7446 = new TTL7446();
 	private newFND fnd = new newFND();
-	int num;
 	int[] output7490 = new int[4];
 	int oldclock;
-	int[] output7446 = new int[7];
+	int minutecount;
+	int hourcount;
+	int[][] output7446 = new int[4][7];
 	boolean[][] dispData = new boolean[5][25];
 	
 	MergeClass() {
@@ -30,11 +31,11 @@ public class MergeClass {
 	
 	private void setInput() {
 		ttl7446.setInput(output7490);
-		this.output7446 = ttl7446.output;
+		this.output7446[3] = ttl7446.output;
 	}
 	
 	private void fndInput() {
-		fnd.setInput(output7446);
+		fnd.setInput(output7446[3]);
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
 				this.dispData[i][j+20] = fnd.dispData[i][j];				

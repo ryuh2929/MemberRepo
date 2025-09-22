@@ -4,6 +4,8 @@ public class TTL7490 {
 	int num;
 	int[] output = new int[4];
 	int oldclock;
+	int minutecount;
+	int hourcount;
 	
 	TTL7490() {
 		oldclock = 0;
@@ -25,7 +27,15 @@ public class TTL7490 {
 	
 	public void setClock(int clk) {
 		if(clk == 0 && oldclock == 1) {
-			if(++num == 10) num = 0;
+			if(++num == 10) {
+				if(++minutecount == 60) {
+					if(++hourcount == 24) {
+						hourcount = 0;
+					}
+					minutecount = 0;
+				}
+				num = 0;
+			}
 			
 			cnvt();
 		}
