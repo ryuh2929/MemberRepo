@@ -5,8 +5,7 @@ public class newMain {
 
 		MergeClass c = new MergeClass();
 		
-//		int count = 722;
-		int count = 1442;
+		int count = 722;
 		
 		for (int i = 0; i < count * 2; i++) {
 			c.setClock(i%2);

@@ -43,7 +43,6 @@ public class MergeClass {
 		ttl7490b.setClock(this.output7490[2][3]);
 		ttl7490a.setClock(this.output7490[1][3]);
 		if (ttl7490b.num == 2 && ttl7490a.num == 1) {
-			System.out.println("ooo");
 			ttl7490b.reset(1,0,0);
 			ttl7490a.reset(1,0,0);
 			ttl7490d.setClock(1);
