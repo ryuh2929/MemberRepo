@@ -17,7 +17,7 @@ public class MergeClass {
 		this.output7490[3] = ttl7490d.output;
 		ttl7490c = new TTL7490();
 		this.output7490[2] = ttl7490c.output;
-		ttl7490b = new TTL7490();
+		ttl7490b = new TTL7490(0,1,0);
 		this.output7490[1] = ttl7490b.output;
 		ttl7490a = new TTL7490();
 		this.output7490[0] = ttl7490a.output;
@@ -32,7 +32,6 @@ public class MergeClass {
 	public void setClock(int clk) {
 		ttl7490d.setClock(clk);
 		ttl7490c.setClock(this.output7490[3][3]); // D 값을 clk 로 넘겨주는 트릭
-		System.out.println(ttl7490c.num);
 		if (ttl7490c.output[1] == 1 && ttl7490c.output[2] == 1) {
 			ttl7490c.reset(1, 0, 0);
 			ttl7490b.setClock(1);
@@ -42,8 +41,8 @@ public class MergeClass {
 		}
 		ttl7490b.setClock(this.output7490[2][3]);
 		ttl7490a.setClock(this.output7490[1][3]);
-		if (ttl7490b.num == 2 && ttl7490a.num == 1) {
-			ttl7490b.reset(1,0,0);
+		if (ttl7490b.num == 3 && ttl7490a.num == 1) {
+			ttl7490b.reset(0,1,0);
 			ttl7490a.reset(1,0,0);
 			ttl7490d.setClock(1);
 //			ttl7490b.num = 9;
