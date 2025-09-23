@@ -1,6 +1,6 @@
 package clock;
 
-public class FND {
+public class FND { // 이거 안쓰고 newFND 씀. newFND는 디스플레이 방식, 이거는 순서대로 일일이 찍어내는 방식 
 	int[] data = new int[7];
 	
 	public void setInput(int[] data) {

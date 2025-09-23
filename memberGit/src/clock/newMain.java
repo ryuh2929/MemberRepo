@@ -1,6 +1,6 @@
 package clock;
 
-public class newMain {
+public class newMain { // 나머지 클래스 합쳐서 만든 MergeClass 사용해서 01:00 ~ 12:59 시계 출력
 	public static void main(String[] args) {
 
 		MergeClass c = new MergeClass();

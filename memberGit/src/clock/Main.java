@@ -1,6 +1,6 @@
 package clock;
 
-public class Main {
+public class Main { // TTL7490 > TTL7446 > newFND 사용해서 0~9 표기하는 실행 클래스
 	public static void main(String[] args) {
 
 		TTL7490 ttl7490 = new TTL7490();
@@ -11,14 +11,8 @@ public class Main {
 			ttl7490.setClock(i%2);
 			ttl7446.setInput(ttl7490.getOutput());
 			if (i%2 == 0) {
-//				for(int j = 0; j < 4; j++) {
-//					System.out.print(ttl7490.getOutput()[3-j]);
-//				}
-//				System.out.print(" : ");
-//				for(int j = 0; j < 7; j++) {
-//					System.out.print(ttl7446.getOutput()[j]);
-//				}
-//				System.out.println();
+//				for(int j = 0; j < 4; j
+
 				fnd.setInput(ttl7446.getOutput());
 				fnd.dispFnd();
 			}

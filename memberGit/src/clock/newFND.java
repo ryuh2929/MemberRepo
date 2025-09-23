@@ -1,6 +1,6 @@
 package clock;
 
-public class newFND {
+public class newFND { // int[7] 받아서 dispData 5x5 화면에 숫자 출력
 	boolean[][] dispData = new boolean[5][5];
 	
 	public void setInput(int[] data) {

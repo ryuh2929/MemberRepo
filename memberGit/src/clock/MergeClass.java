@@ -1,6 +1,6 @@
 package clock;
 
-public class MergeClass {
+public class MergeClass { // 나머지 클래스 다 합쳐서 MergeClass만 불러서 사용할 수 있게 만듬
 	private TTL7490 ttl7490d;
 	private TTL7490 ttl7490c;
 	private TTL7490 ttl7490b;
@@ -35,9 +35,6 @@ public class MergeClass {
 		if (ttl7490c.output[1] == 1 && ttl7490c.output[2] == 1) {
 			ttl7490c.reset(1, 0, 0);
 			ttl7490b.setClock(1);
-//			ttl7490c.num = 9;
-//			ttl7490c.setClock(1);
-//			ttl7490c.setClock(0);
 		}
 		ttl7490b.setClock(this.output7490[2][3]);
 		ttl7490a.setClock(this.output7490[1][3]);
@@ -45,12 +42,6 @@ public class MergeClass {
 			ttl7490b.reset(0,1,0);
 			ttl7490a.reset(1,0,0);
 			ttl7490d.setClock(1);
-//			ttl7490b.num = 9;
-//			ttl7490b.setClock(1);
-//			ttl7490b.setClock(0);
-//			ttl7490a.num = 9;
-//			ttl7490a.setClock(1);
-//			ttl7490a.setClock(0);
 		}
 	}
 	
@@ -102,7 +93,7 @@ public class MergeClass {
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 25; j++) {
 				if (this.dispData[i][j]) {
-					System.out.print("#");
+					System.out.print("█");
 				} else {
 					System.out.print(" ");
 				}
