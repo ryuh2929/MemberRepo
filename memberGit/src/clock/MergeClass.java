@@ -12,7 +12,7 @@ public class MergeClass {
 	boolean[][] dispData = new boolean[5][25];
 	
 	MergeClass() { // ttl7490.output 형태는 {A, B, C, D}
-		this.reset();
+		this.dispReset();
 		ttl7490d = new TTL7490();
 		this.output7490[3] = ttl7490d.output;
 		ttl7490c = new TTL7490();
@@ -31,13 +31,29 @@ public class MergeClass {
 	
 	public void setClock(int clk) {
 		ttl7490d.setClock(clk);
-		this.output7490[3] = ttl7490d.output;
-		ttl7490c.setClock(this.output7490[3][3]);
-		this.output7490[2] = ttl7490c.output;
+		ttl7490c.setClock(this.output7490[3][3]); // D 값을 clk 로 넘겨주는 트릭
+		System.out.println(ttl7490c.num);
+		if (ttl7490c.output[1] == 1 && ttl7490c.output[2] == 1) {
+			ttl7490c.reset(1, 0, 0);
+			ttl7490b.setClock(1);
+//			ttl7490c.num = 9;
+//			ttl7490c.setClock(1);
+//			ttl7490c.setClock(0);
+		}
 		ttl7490b.setClock(this.output7490[2][3]);
-		this.output7490[1] = ttl7490b.output;
 		ttl7490a.setClock(this.output7490[1][3]);
-		this.output7490[0] = ttl7490a.output;
+		if (ttl7490b.num == 2 && ttl7490a.num == 1) {
+			System.out.println("ooo");
+			ttl7490b.reset(1,0,0);
+			ttl7490a.reset(1,0,0);
+			ttl7490d.setClock(1);
+//			ttl7490b.num = 9;
+//			ttl7490b.setClock(1);
+//			ttl7490b.setClock(0);
+//			ttl7490a.num = 9;
+//			ttl7490a.setClock(1);
+//			ttl7490a.setClock(0);
+		}
 	}
 	
 	private void setInput() {
@@ -80,7 +96,6 @@ public class MergeClass {
 	
 	public void count() {
 		this.setInput();
-		System.out.println(this.output7490[3][3]);
 		this.fndInput();
 		this.dispFnd();	
 	}
@@ -99,7 +114,7 @@ public class MergeClass {
 		System.out.println();
 	}
 	
-	private void reset() { // 00:00 디스플레이 초기화
+	private void dispReset() { // 00:00 디스플레이 초기화
 		for (int i = 0; i < 5; i++) {
 			if (i%2 == 1) {
 				this.dispData[i][12] = true;
