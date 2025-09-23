@@ -5,7 +5,7 @@ public class newMain { // 나머지 클래스 합쳐서 만든 MergeClass 사용
 
 		MergeClass c = new MergeClass();
 		
-		int count = 722;
+		int count = 3600*12*2 + 2;
 		
 		for (int i = 0; i < count * 2; i++) {
 			c.setClock(i%2);
