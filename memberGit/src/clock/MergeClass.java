@@ -153,7 +153,7 @@ public class MergeClass { // 나머지 클래스 다 합쳐서 MergeClass만 불
 		System.out.println();
 	}
 	
-	private void dispReset() { // 00:00 디스플레이 초기화
+	private void dispReset() { // 00:00:00 디스플레이 초기화
 		for (int i = 0; i < 5; i++) {
 			if (i%2 == 1) {
 				this.dispData[i][12] = true;
