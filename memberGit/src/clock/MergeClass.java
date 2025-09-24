@@ -35,6 +35,27 @@ public class MergeClass { // 나머지 클래스 다 합쳐서 MergeClass만 불
 //		this.output7490[3] = ttl7490d.output;
 //	}
 	
+	public void setNowTime(int h0, int h1, int m0, int m1, int s0, int s1) { // int 변수들로 변환한 현재 시간을 받아와서 초기 화면에 넣어주는 메서드 (this.output7490 배열을 바꿔줌)
+		ttl7490a.num = h0-1;
+		ttl7490a.setClock(1);
+		ttl7490a.setClock(0);
+		ttl7490b.num = h1-1;
+		ttl7490b.setClock(1);
+		ttl7490b.setClock(0);
+		ttl7490c.num = m0-1;
+		ttl7490c.setClock(1);
+		ttl7490c.setClock(0);
+		ttl7490d.num = m1-1;
+		ttl7490d.setClock(1);
+		ttl7490d.setClock(0);
+		ttl7490e.num = s0-1;
+		ttl7490e.setClock(1);
+		ttl7490e.setClock(0);
+		ttl7490f.num = s1-1;
+		ttl7490f.setClock(1);
+		ttl7490f.setClock(0);
+	}
+	
 	public void setClock(int clk) { // 0, 1을 반복 입력받아 시간이 흐르는 메서드
 		ttl7490f.setClock(clk);
 		ttl7490e.setClock(this.output7490[5][3]); // D 값을 clk 로 넘겨주는 트릭
@@ -132,7 +153,7 @@ public class MergeClass { // 나머지 클래스 다 합쳐서 MergeClass만 불
 		System.out.println();
 	}
 	
-	private void dispReset() { // 00:00 디스플레이 초기화
+	private void dispReset() { // 00:00:00 디스플레이 초기화
 		for (int i = 0; i < 5; i++) {
 			if (i%2 == 1) {
 				this.dispData[i][12] = true;
