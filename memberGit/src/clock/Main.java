@@ -11,7 +11,6 @@ public class Main { // TTL7490 > TTL7446 > newFND 사용해서 0~9 표기하는 
 			ttl7490.setClock(i%2);
 			ttl7446.setInput(ttl7490.getOutput());
 			if (i%2 == 0) {
-//				for(int j = 0; j < 4; j
 
 				fnd.setInput(ttl7446.getOutput());
 				fnd.dispFnd();
